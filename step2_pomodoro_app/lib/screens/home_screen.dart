@@ -47,6 +47,14 @@ class _HomeScreenState extends State<HomeScreen> {
     return duration.toString().split('.').first.substring(2);
   }
 
+  void initTimer() {
+    setState(() {
+      totalSeconds = twentyFiveMinutes;
+      isRunning = false;
+      timer.cancel();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,15 +80,44 @@ class _HomeScreenState extends State<HomeScreen> {
           Flexible(
             flex: 2,
             child: Center(
-              child: IconButton(
-                onPressed: isRunning ? onPausePressed : onStartPressed,
-                iconSize: 120,
-                color: Theme.of(context).cardColor,
-                icon: Icon(
-                  isRunning
-                      ? Icons.pause_circle_outline
-                      : Icons.play_circle_outline,
-                ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    onPressed: isRunning ? onPausePressed : onStartPressed,
+                    iconSize: 120,
+                    color: Theme.of(context).cardColor,
+                    icon: Icon(
+                      isRunning
+                          ? Icons.pause_circle_outline
+                          : Icons.play_circle_outline,
+                    ),
+                  ),
+                  InkWell(
+                    // 핸드폰 이벤트들을 다 넣을 수 있는 곳,, 영역 클릭을 위해서,,,
+                    onTap: initTimer,
+                    child: Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.refresh_outlined,
+                            color: Theme.of(context).cardColor,
+                          ),
+                          Text(
+                            'refresh',
+                            style: TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.w500,
+                              color: Theme.of(context).cardColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
