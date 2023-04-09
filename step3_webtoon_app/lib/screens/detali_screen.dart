@@ -13,19 +13,53 @@ class DetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text(
-          '오늘의 웹툰',
-          style: TextStyle(
-            fontSize: 24,
-          ),
-        ),
         backgroundColor: Colors.white,
-        foregroundColor: Colors.green,
-        elevation: 0.5,
-      ),
-    );
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            title,
+            style: const TextStyle(
+              fontSize: 24,
+            ),
+          ),
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.green,
+          elevation: 0.5,
+        ),
+        body: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Column(
+              children: [
+                const SizedBox(
+                  height: 50,
+                ),
+                Hero(
+                  tag: id,
+                  child: Container(
+                    width: 250,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 15,
+                            offset: const Offset(10, 10),
+                            color: Colors.black.withOpacity(0.3),
+                          ),
+                        ]),
+                    clipBehavior: Clip.hardEdge,
+                    child: Image.network(
+                      thumb,
+                      headers: const {
+                        "User-Agent":
+                            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36",
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ));
   }
 }
